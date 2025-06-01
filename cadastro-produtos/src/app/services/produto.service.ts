@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Produto } from '../models/produto';
+import { findIndex } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,12 @@ export class ProdutoService {
       return [];
     }
     return JSON.parse(produtosJson);
+  }
+
+  findById(id: number): Produto | undefined {
+    const produtos = this.getAll();
+    const produto= produtos.find(p => p.id === id);
+     return produto;
   }
 
   //Salvar um produto (novo ou atualizar)
