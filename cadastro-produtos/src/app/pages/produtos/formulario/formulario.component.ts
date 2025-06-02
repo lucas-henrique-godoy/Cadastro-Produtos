@@ -15,9 +15,9 @@ import { ProdutoService } from 'src/app/services/produto.service';
 export class FormularioComponent {
   form: FormGroup;
   codigoDuplicado: boolean = false;
-  
 
-  
+
+
 
   constructor(
   public dialogRef: MatDialogRef<FormularioComponent>,
@@ -25,7 +25,7 @@ export class FormularioComponent {
   private fb: FormBuilder,
   private snackBar: MatSnackBar,
   private produtoService: ProdutoService
- 
+
 ) {
   const produto: Produto = data ?? {
     id: 0,
@@ -38,9 +38,9 @@ export class FormularioComponent {
 
   this.form = this.fb.group({
     id: [produto.id],
-    codigo: [produto.codigo],
-    nome: [produto.nome, Validators.required],
-    descricao: [produto.descricao],
+    codigo: [produto.codigo, [Validators.minLength(3), Validators.maxLength(20)]],
+    nome: [produto.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+    descricao: [produto.descricao, [Validators.maxLength(500)]],
     valor: [produto.valor, [Validators.required, Validators.min(0)]],
     custo: [produto.custo, [Validators.required, Validators.min(0)]],
   });
@@ -86,7 +86,7 @@ export class FormularioComponent {
 
   cancelar() {
     this.dialogRef.close(null);
-  } 
+  }
 
   formatarMoeda(campo: 'valor' | 'custo') {
     let valor = this.form.get(campo)?.value;

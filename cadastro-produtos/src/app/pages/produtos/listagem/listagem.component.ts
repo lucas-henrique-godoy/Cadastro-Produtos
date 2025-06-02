@@ -22,10 +22,11 @@ export class ListagemComponent implements OnInit {
 
   constructor(private produtoService: ProdutoService, private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource<Produto>([]);
+    this.carregarProdutos();
+
   }
 
   ngOnInit(): void {
-    this.carregarProdutos();
   }
 
   carregarProdutos(): void {
@@ -45,7 +46,7 @@ export class ListagemComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-    
+
   }
 
   abrirModal(produto?: Produto): void {
