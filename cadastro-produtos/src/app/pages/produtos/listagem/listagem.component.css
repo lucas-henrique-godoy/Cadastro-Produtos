@@ -1,0 +1,64 @@
+*{
+    padding: 20px;
+}
+
+
+/* Container centralizado com largura máxima */
+.container {
+  max-width: 100%;      /* largura máxima da tabela */
+  margin: 30px auto;     /* centraliza horizontalmente com margem em cima e embaixo */
+  padding: 20px;         /* espaçamento interno */
+  box-sizing: border-box; /* garante que padding não aumenta a largura total */
+  background-color: #f9f9f9; /* fundo leve para destacar */
+  border-radius: 8px;    /* cantos arredondados */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* sombra leve */
+}
+
+/* Campo de pesquisa e botão alinhados lado a lado */
+mat-form-field {
+  width: 70%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* Botão para ficar alinhado com o campo de pesquisa */
+button[mat-raised-button] {
+  vertical-align: middle;
+}
+
+/* Tabela com largura 100% do container */
+table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Cabeçalhos centralizados e em negrito */
+th.mat-header-cell {
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Células alinhadas ao centro para os dados */
+td.mat-cell {
+  text-align: center;
+}
+
+/* Ajusta o paginator para ficar alinhado no centro */
+mat-paginator {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Responsividade: na tela pequena deixa a tabela rolável horizontal */
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+

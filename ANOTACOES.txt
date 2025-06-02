@@ -1,0 +1,101 @@
+PROJETO CADASTRO DE PRODUTOS
+
+Explicando seu ProdutoService
+ts
+Copiar
+Editar
+@Injectable({
+  providedIn: 'root'
+})
+export class ProdutoService {
+Aqui você define que o serviço pode ser injetado em qualquer parte da aplicação, usando a injeção de dependência do Angular.
+
+ts
+Copiar
+Editar
+private readonly STORAGE_KEY = 'produtos';
+Essa é a chave usada para salvar e ler os produtos do localStorage do navegador.
+
+ts
+Copiar
+Editar
+constructor() { }
+Construtor vazio, você não precisa passar nada aqui.
+
+Método getAll()
+ts
+Copiar
+Editar
+getAll(): Produto[] {
+  const produtosJson = localStorage.getItem(this.STORAGE_KEY);
+  if (!produtosJson) {
+    return [];
+  }
+  return JSON.parse(produtosJson);
+}
+Pega os produtos salvos no localStorage como string JSON.
+
+Se não existir (primeiro uso), retorna um array vazio.
+
+Se existir, converte a string JSON em array de objetos Produto e retorna.
+
+Método findById(id: number)
+ts
+Copiar
+Editar
+findById(id: number): Produto | undefined {
+  const produtos = this.getAll();
+  const produto= produtos.find(p => p.id === id);
+  return produto;
+}
+Busca um produto pelo seu id.
+
+Retorna o produto se encontrar ou undefined se não.
+
+Método save(produto: Produto)
+ts
+Copiar
+Editar
+save(produto: Produto): void {
+  const produtos = this.getAll(); // pega lista atualizada
+  const index = produtos.findIndex(p => p.id === produto.id); // procura índice pelo id
+
+  if (index === -1) {
+    // Se não existe produto com esse id (produto novo)
+    produto.id = this.generateId(produtos); // gera novo id incremental
+    produtos.push(produto); // adiciona na lista
+  } else {
+    // Produto existe, atualiza a lista na posição correta
+    produtos[index] = produto;
+  }
+  localStorage.setItem(this.STORAGE_KEY, JSON.stringify(produtos)); // salva tudo no localStorage
+}
+Se o produto não existir na lista (novo), gera um novo id incremental e adiciona.
+
+Se já existir (editar), atualiza o produto na lista.
+
+Salva a lista atualizada no localStorage.
+
+Método delete(id: number)
+ts
+Copiar
+Editar
+delete(id: number): void {
+  let produtos = this.getAll();
+  produtos = produtos.filter(p => p.id !== id); // remove produto do id informado
+  localStorage.setItem(this.STORAGE_KEY, JSON.stringify(produtos)); // atualiza localStorage
+}
+Remove o produto que tem o id passado, atualizando o localStorage.
+
+Método privado generateId(produtos: Produto[])
+ts
+Copiar
+Editar
+private generateId(produtos: Produto[]): number {
+  if (produtos.length === 0) {
+    return 1; // se lista vazia, id começa em 1
+  }
+  return Math.max(...produtos.map(p => p.id)) + 1; // pega maior id + 1
+}
+Gera um id novo incremental para o próximo produto.
+

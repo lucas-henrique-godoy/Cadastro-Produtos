@@ -4,7 +4,7 @@ import { FormularioComponent } from './pages/produtos/formulario/formulario.comp
 import { ListagemComponent } from './pages/produtos/listagem/listagem.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'formulario', pathMatch: 'full'},
+  { path: '', redirectTo: 'listagem', pathMatch: 'full'},
   {path: 'formulario', component: FormularioComponent },
   {path: 'listagem', component: ListagemComponent}
 ];
