@@ -61,4 +61,18 @@ mat-paginator {
   }
 }
 
+.mat-column-codigo,
+.mat-column-nome,
+.mat-column-descricao,
+.mat-column-valor,
+.mat-column-custo,
+.mat-column-acoes {
+  width: 16.66%; /* 100% dividido pelo número de colunas */
+}
+
+th.mat-header-cell, td.mat-cell {
+  text-align: left;
+  padding: 8px 16px;
+}
+
 

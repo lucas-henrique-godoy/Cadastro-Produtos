@@ -88,4 +88,21 @@ export class FormularioComponent {
     this.dialogRef.close(null);
   } 
 
+  formatarMoeda(campo: 'valor' | 'custo') {
+    let valor = this.form.get(campo)?.value;
+    if (typeof valor !== 'string') valor = valor?.toString() ?? '';
+    // Remove tudo que não for número
+    valor = valor.replace(/\D/g, '');
+    // Converte para centavos
+    let numero = parseFloat(valor) / 100;
+    if (!isNaN(numero)) {
+      // Formata para moeda brasileira
+      this.form.get(campo)?.setValue(
+        numero.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }),
+        { emitEvent: false }
+      );
+    } else {
+      this.form.get(campo)?.setValue('', { emitEvent: false });
+    }
+  }
 }

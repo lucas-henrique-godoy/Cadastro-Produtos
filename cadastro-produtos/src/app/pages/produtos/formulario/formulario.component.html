@@ -23,7 +23,7 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Valor</mat-label>
-        <input matInput type="number" formControlName="valor"/>
+        <input matInput formControlName="valor" (input)="formatarMoeda('valor')"/>
         <mat-error *ngIf="form.get('valor')?.hasError('required')">
             Valor obrigatório
         </mat-error>
@@ -34,7 +34,7 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Custo</mat-label>
-        <input matInput type="number" formControlName="custo" />
+        <input matInput formControlName="custo" (input)="formatarMoeda('custo')" />
         <mat-error *ngIf="form.get('custo')?.hasError('required')">
             Custo obrigatório
         </mat-error>
